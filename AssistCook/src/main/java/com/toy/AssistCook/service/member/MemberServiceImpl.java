@@ -26,7 +26,7 @@ public class MemberServiceImpl implements MemberService {
         Member member = new Member();
         String address = buildFullAddress(memberForm);
         String email = buildFullEmail(memberForm);
-        member.setLogin_id(memberForm.getLogin_id());
+        member.setLoginId(memberForm.getLogin_id());
         member.setPw(memberForm.getPw());
         member.setName(memberForm.getName());
         member.setBirth(memberForm.getBirth());
@@ -45,5 +45,17 @@ public class MemberServiceImpl implements MemberService {
 
     private String buildFullEmail(MemberForm memberForm) {
         return memberForm.getEmail() + "@" + memberForm.getDomain();
+    }
+
+    public boolean findMemberById(String loginId) {
+        Member findMember = memberRepository.findById(loginId);
+        log.info("회원 검색 결과: {}", findMember);
+        if (findMember != null) {
+            log.info("이미 사용 중인 아이디");
+            return false;
+        } else {
+            log.info("사용 할 수 있는 아이디");
+            return true;
+        }
     }
 }

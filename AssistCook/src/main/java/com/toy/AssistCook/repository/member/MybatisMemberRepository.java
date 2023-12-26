@@ -19,4 +19,9 @@ public class MybatisMemberRepository implements MemberRepository{
         memberMapper.save(member);
         log.info("mybatis 회원 가입 완료");
     }
+
+    public Member findById(String loginId) {
+        log.info("회원 아이디 검색");
+        return memberMapper.findById(loginId);
+    }
 }
