@@ -3,7 +3,7 @@ package com.toy.AssistCook.service.member;
 import com.toy.AssistCook.domain.member.Grade;
 import com.toy.AssistCook.domain.member.Member;
 import com.toy.AssistCook.domain.member.MemberForm;
-import com.toy.AssistCook.repository.member.MemberRepository;
+import com.toy.AssistCook.repository.member.MybatisMemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-    private final MemberRepository memberRepository;
+    private final MybatisMemberRepository memberRepository;
 
     @Override
     public void save(MemberForm memberForm) {
@@ -26,7 +26,7 @@ public class MemberServiceImpl implements MemberService {
         Member member = new Member();
         String address = buildFullAddress(memberForm);
         String email = buildFullEmail(memberForm);
-        member.setLoginId(memberForm.getLoginId());
+        member.setLogin_id(memberForm.getLogin_id());
         member.setPw(memberForm.getPw());
         member.setName(memberForm.getName());
         member.setBirth(memberForm.getBirth());
