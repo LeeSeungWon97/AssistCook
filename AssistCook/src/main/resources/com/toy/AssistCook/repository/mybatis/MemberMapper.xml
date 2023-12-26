@@ -7,4 +7,10 @@
         values (#{login_id}, #{pw}, #{name}, #{birth}, #{address}, #{email}, #{profile}, #{grade})
     </insert>
 
+    <select id="findById">
+        select *
+        from member
+        where login_id = #{loginId}
+    </select>
+
 </mapper>

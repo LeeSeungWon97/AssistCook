@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>회원 가입</title>
-
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <style>
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+        .success-message {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <h1>회원 가입</h1>
@@ -12,6 +21,7 @@
         <div>
             <input type="text" name="login_id" id="login_id" placeholder="아이디">
             <button type="button" id="duplicationBtn" onclick="isDuplication()">중복확인</button>
+            <p id="idDuplicateResult"></p>
         </div>
         <div>
             <input type="password" name="pw" id="pw" placeholder="비밀번호">
@@ -94,7 +104,28 @@
             console.log("중복 확인 버튼 클릭");
             let checkId = document.getElementById("login_id").value;
             console.log("확인할 아이디: " + checkId);
-
+            fetch(`/api/idDuplication?login_id=${encodeURIComponent(checkId)}`,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    let result = document.getElementById("idDuplicateResult");
+                    result.innerText = data.message;
+                    if (data.message == "사용 가능한 아이디 입니다.") {
+                        result.classList.remove("error-message");
+                        result.classList.add("success-message");
+                    } else {
+                        result.classList.remove("success-message");
+                        result.classList.add("error-message");
+                    }
+                })
+                .catch(error => {
+                    console.log('Error', error);
+                });
         }
     </script>
 </body>
