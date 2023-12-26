@@ -21,7 +21,7 @@ public class ApiController {
     private final MemberServiceImpl memberService;
 
     @GetMapping("/idDuplication")
-    public ResponseEntity<Map<String, String>> isIdDuplication(@RequestParam("login_id") String loginId) {
+    public ResponseEntity<Map<String, String>> isIdDuplication(@RequestParam("loginId") String loginId) {
         log.info("아이디 중복 체크 요청");
         boolean isDuplicate = memberService.findMemberById(loginId);
         Map<String, String> response = new HashMap<>();
