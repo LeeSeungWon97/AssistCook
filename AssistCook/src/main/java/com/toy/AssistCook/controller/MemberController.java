@@ -1,7 +1,7 @@
 package com.toy.AssistCook.controller;
 
 import com.toy.AssistCook.domain.member.MemberForm;
-import com.toy.AssistCook.service.member.MemberService;
+import com.toy.AssistCook.service.member.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/members")
 public class MemberController {
 
-    private final MemberService memberService;
+    private final MemberServiceImpl memberService;
 
     @GetMapping("new")
     public String joinForm() {

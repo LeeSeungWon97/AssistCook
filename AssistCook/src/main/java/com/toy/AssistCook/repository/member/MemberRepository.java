@@ -4,5 +4,5 @@ import com.toy.AssistCook.domain.member.Member;
 
 public interface MemberRepository {
 
-    Member save(Member member);
+    void save(Member member);
 }
