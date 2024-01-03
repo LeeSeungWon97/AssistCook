@@ -94,3 +94,57 @@ function isDuplication() {
         .catch(error => {
         });
 }
+
+function requestEmailVerificationCode() {
+    console.log("인증 코드 전송 요청");
+    let email = document.getElementById('email').value + "@" + document.getElementById('domain').value;
+    console.log("전송할 이메일: " + email);
+    fetch('/api/requestEmailVerificationCode',{
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(email)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Response Data:' + data.message);
+        })
+        .catch(error => {
+            console.log('Error');
+        })
+}
+
+function isCorrectCode() {
+    console.log("인증 코드 확인");
+    let inputCode = document.getElementById('checkCode').value;
+    let email = document.getElementById('email').value + "@" + document.getElementById('domain').value;
+    console.log("입력 인증 코드");
+    fetch(`/api/checkVerificationCode?checkCode=${inputCode}&requestEmail=${encodeURIComponent(email)}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            let result = document.getElementById('checkCodeResult');
+            result.innerText = data.message;
+            if (data.message=='인증 완료') {
+                result.classList.remove('error-message');
+                result.classList.add('success-message');
+            } else {
+                result.classList.remove('success-message');
+                result.classList.add('error-message')
+            }
+        })
+        .catch(error => {
+        });
+}
