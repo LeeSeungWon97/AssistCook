@@ -11,3 +11,13 @@ CREATE TABLE member
     profile  VARCHAR(255),
     grade    VARCHAR(10)  NOT NULL
 );
+
+DROP TABLE IF EXISTS email_verification;
+CREATE TABLE email_verification
+(
+    id                INT AUTO_INCREMENT PRIMARY KEY,
+    email             VARCHAR(255),
+    verification_code VARCHAR(255),
+    expiration_time   TIMESTAMP,
+    status            VARCHAR(20) DEFAULT 'ACTIVE'
+);

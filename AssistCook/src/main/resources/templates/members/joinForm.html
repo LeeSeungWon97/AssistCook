@@ -50,7 +50,14 @@
                 <option value="naver.com">네이버</option>
                 <option value="gmail.com">구글</option>
             </select>
+            <button type="button" onclick="requestEmailVerificationCode()">인증코드 전송</button>
         </div>
+        <div>
+            <input type="text" id="checkCode">
+            <input type="button" value="인증 번호 확인" onclick="isCorrectCode()">
+            <p id="checkCodeResult"></p>
+        </div>
+
         <div>
             <button type="submit">회원 가입</button>
         </div>
