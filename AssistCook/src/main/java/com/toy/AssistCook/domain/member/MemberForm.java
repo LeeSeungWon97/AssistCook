@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class MemberForm {
     private Long id;
-    private String login_id;
+    private String loginId;
     private String pw;
     private String name;
     private String birth;

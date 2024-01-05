@@ -79,7 +79,6 @@ public class EmailServiceImpl {
             if (findResult.getVerificationCode().equals(inputCode)) {
                 // 유효 기간이 지나지 않은 경우
                 if (LocalDateTime.now().isBefore(findResult.getExpirationTime())) {
-                    emailVerificationRepository.updateStatus(findResult.getId(),CodeStatus.USED);
                     return String.valueOf(CodeStatus.ACTIVE);
                 } else {
                     // 유효 기간이 지난 경우

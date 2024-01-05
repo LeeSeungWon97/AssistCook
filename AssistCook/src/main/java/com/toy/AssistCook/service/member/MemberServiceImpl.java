@@ -26,7 +26,7 @@ public class MemberServiceImpl implements MemberService {
         Member member = new Member();
         String address = buildFullAddress(memberForm);
         String email = buildFullEmail(memberForm);
-        member.setLoginId(memberForm.getLogin_id());
+        member.setLoginId(memberForm.getLoginId());
         member.setPw(memberForm.getPw());
         member.setName(memberForm.getName());
         member.setBirth(memberForm.getBirth());

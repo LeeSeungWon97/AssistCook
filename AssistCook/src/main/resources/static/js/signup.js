@@ -67,7 +67,7 @@ function selectDomain() {
 }
 
 function isDuplication() {
-    let checkId = document.getElementById("login_id").value;
+    let checkId = document.getElementById("loginId").value;
     fetch(`/api/idDuplication?loginId=${encodeURIComponent(checkId)}`, {
         method: 'GET',
         headers: {
