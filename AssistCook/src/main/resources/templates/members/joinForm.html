@@ -5,6 +5,15 @@
     <title>회원 가입</title>
     <script src="/js/signup.js" defer></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" defer></script>
+    <script th:inline="javascript">
+        let errorValue = /*[[${error}]]*/ null;
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log(errorValue);
+            if (errorValue != null) {
+                alert(errorValue);
+            }
+        });
+    </script>
     <style>
         .error-message {
             color: red;
@@ -20,31 +29,31 @@
     <h1>회원 가입</h1>
     <form action="new" method="post">
         <div>
-            <input type="text" name="loginId" id="loginId" placeholder="아이디">
+            <input type="text" name="loginId" id="loginId" placeholder="아이디" th:value="${memberForm.getLoginId()}">
             <button type="button" id="duplicationBtn" onclick="isDuplication()">중복확인</button>
             <p id="idDuplicateResult"></p>
         </div>
         <div>
-            <input type="password" name="pw" id="pw" placeholder="비밀번호"><br>
+            <input type="password" name="pw" id="pw" placeholder="비밀번호" th:value="${memberForm.getPw()}"><br>
             <input type="password" id="pwCheck" onblur="checkPassword()" placeholder="비밀번호 확인">
             <p id="checkPassword"></p>
         </div>
         <div>
-            <input type="text" name="name" id="name" placeholder="이름">
+            <input type="text" name="name" id="name" placeholder="이름" th:value="${memberForm.getName()}">
         </div>
         <div>
-            <input type="date" name="birth" id="birth" placeholder="생년월일">
+            <input type="date" name="birth" id="birth" placeholder="생년월일" th:value="${memberForm.getBirth()}">
         </div>
         <div>
-            <input type="text" name="postcode" id="postcode" placeholder="우편번호" readonly>
+            <input type="text" name="postcode" id="postcode" placeholder="우편번호" readonly th:value="${memberForm.getPostcode()}">
             <input type="button" onclick="daumPostcode()" value="우편번호 찾기"><br>
-            <input type="text" name="address" id="address" placeholder="주소" readonly><br>
-            <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소">
-            <input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목">
+            <input type="text" name="address" id="address" placeholder="주소" readonly th:value="${memberForm.getAddress()}"><br>
+            <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" th:value="${memberForm.getDetailAddress()}">
+            <input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목" th:value="${memberForm.getExtraAddress()}">
         </div>
         <div>
             <label for="email">이메일</label><br>
-            <input type="text" name="email" id="email"> @ <input type="text" name="domain" id="domain">
+            <input type="text" name="email" id="email" th:value="${memberForm.getEmail()}"> @ <input type="text" name="domain" id="domain" th:value="${memberForm.getDomain()}">
             <select name="domainList" id="domainList" onchange="selectDomain()">
                 <option value="">직접입력</option>
                 <option value="naver.com">네이버</option>
